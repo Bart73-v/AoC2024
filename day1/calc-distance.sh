@@ -15,7 +15,7 @@ sort_arrays() {
 }
 
 read_from_file() {
-	while read -r x y; do
+	while read -r x y || [[ -n "$x" ]]; do
 		LEFT_ARRAY+=("$x")
 		RIGHT_ARRAY+=("$y")
 	done < "$input_file"
@@ -28,7 +28,7 @@ get_distance(){
 }
 
 get_similarity() {
-	for i in $(seq 0 $(( ${#LEFT_ARRAY[@]} - 1 ))); do
+	for (( i = 0; i < ${#LEFT_ARRAY[@]}; i++)); do
 		similarity+=$(( ${LEFT_ARRAY[i]} * $(grep -o "${LEFT_ARRAY[i]}" <<< "${RIGHT_ARRAY[*]}" | wc -l) ))
 	done
 }
