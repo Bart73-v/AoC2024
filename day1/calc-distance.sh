@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 set -o pipefail
 
-input_file=./test-input.txt
-#[[ -z $1 ]] && echo "No input file specified."; exit 1
+input_file=$1
+[[ -z $1 ]] && (echo "No input file specified."; exit 1)
 
 declare -a LEFT_ARRAY=()
 declare -a RIGHT_ARRAY=()
+declare -i distance=0
+declare -i similarity=0
 
 sort_arrays() {
-	LEFT_ARRAY=($(for i in "${LEFT_ARRAY[@]}"; do echo "$i"; done | sort -n))
-	RIGHT_ARRAY=($(for i in "${RIGHT_ARRAY[@]}"; do echo "$i"; done | sort -n))
+	IFS=$'\n' LEFT_ARRAY=($(sort <<< "${LEFT_ARRAY[*]}")); unset IFS
+	IFS=$'\n' RIGHT_ARRAY=($(sort <<< "${RIGHT_ARRAY[*]}")); unset IFS
 }
 
 read_from_file() {
@@ -20,13 +22,24 @@ read_from_file() {
 }
 
 get_distance(){
-	local distance=0
-	
-	echo distance
+	for i in $(seq 0 $(( ${#LEFT_ARRAY[@]} - 1 ))); do
+		distance+=$(( ${LEFT_ARRAY[i]} < ${RIGHT_ARRAY[i]} ? ${RIGHT_ARRAY[i]} - ${LEFT_ARRAY[i]} : ${LEFT_ARRAY[i]} - ${RIGHT_ARRAY[i]} ))
+	done
 }
+
+get_similarity() {
+	for i in $(seq 0 $(( ${#LEFT_ARRAY[@]} - 1 ))); do
+		similarity+=$(( ${LEFT_ARRAY[i]} * $(grep -o "${LEFT_ARRAY[i]}" <<< "${RIGHT_ARRAY[*]}" | wc -l) ))
+	done
+}
+
 read_from_file
 sort_arrays
 
-echo "Array Left: ${LEFT_ARRAY[@]}"
-echo "Array Right: ${RIGHT_ARRAY[@]}"
+# part 1
+get_distance
+echo $distance
 
+# part 2
+get_similarity
+echo $similarity
