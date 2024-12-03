@@ -51,6 +51,6 @@ read_from_file_p2() {
 	done < "$input_file"
 }
 
-read_from_file_p2
+read_from_file
 #(( safe_reports-=1 )) #something something bash newline
 echo $safe_reports
