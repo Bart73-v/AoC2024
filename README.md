@@ -2,8 +2,7 @@
 
 Working on [Advent of Code 2024](https://adventofcode.com/2024/)!
 
-![](https://img.shields.io/badge/days%20completed-3-red)  
-![](https://img.shields.io/badge/stars%20⭐-5-yellow)
+![](https://img.shields.io/badge/days%20completed-3-red) ![](https://img.shields.io/badge/stars%20⭐-5-yellow)
 
 | Day | Problem            | Code                    | Stars won                                             |
 |----:|:-------------------|:------------------------|:------------------------------------------------------|
