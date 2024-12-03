@@ -14,7 +14,7 @@ def strictly_decreasing(reports):
 
 safe_reports = 0
 
-with open("input.txt", "r") as file:
+with open("../test-data/input-02.txt", "r") as file:
     for line in file:
         reports = [int(i) for i in line.split()]
         safe = False
