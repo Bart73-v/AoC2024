@@ -10,7 +10,9 @@ declare -i bound_i
 declare -i bound_j
 declare -a seen
 declare -a route
-terminate() { # Because I'm a professional 8-)
+
+# Because I'm a professional 8-)
+terminate() {
 	local msg="${1}"
 	local code="${2}"
 	echo "Error: ${msg}" >&2
@@ -18,17 +20,24 @@ terminate() { # Because I'm a professional 8-)
 }
 usage() {
 	cat <<EOF
-Usage: day6.sh [FILE]
-    Returns the number of distinct positions visited by the guard.
+Usage: day6b.sh [FILE]
+    Returns the number of distinct positions to place an obstruction.
     Arguments:
         FILE: A text file containing current position as described in Day 6: Guard Gallivant
 EOF
 }
 
+# Pre-checks
 [[ $# -lt 1 ]] && ( usage; terminate "No input file specified" 2 )
 [[ ! -s $1 ]] && ( usage; terminate "The input file is empty" 3 )
 
-echo "If you have fond feelings for your CPU pls don't execute" && exit 1
+echo "If you have fond feelings for your CPU, pls don't execute this."
+read -n1 -p "Execute anyway? [y,n]" doit 
+case $doit in  
+  y|Y) echo "executing script" ;; 
+  n|N) terminate "aborting execution" 4 ;; 
+  *) terminate yes or no??? 4 ;; 
+esac
 
 input_file=$1
 mapfile -t lines < <(sed '/^$/d' "$input_file")
@@ -61,6 +70,8 @@ print_map() {
     done
 }
 
+# If called with the argument 'route' keep track of the visited locations.
+# Move forward or turn when encountering an obstacle.
 next_move() {
     print_route="$1"
     if [ "$print_route" = "route" ]; then route+=("$guard_i","$guard_j"); fi
@@ -111,12 +122,14 @@ next_move() {
     esac
 }
 
+# Check whether we encounter a position and direction we have seen before.
 check_loop() {
-    while [[ $done = "false" && ! "${seen[*]}" == *"$guard_i,$guard_j,${map["$guard_i","$guard_j"]}"* ]]; do
-        seen+=("$guard_i" "$guard_j" "${map["$guard_i","$guard_j"]}")
+    pos="$guard_i $guard_j ${map["$guard_i","$guard_j"]}"
+    while [[ $done = "false" && ! "${seen[*]}" == *"$pos"* ]]; do
+        seen+=("$pos")
         next_move
     done
-    if [[ "${seen[*]}" == *"$guard_i $guard_j ${map["$guard_i","$guard_j"]}"* ]]; then
+    if [[ "${seen[*]}" == *"$pos"* ]]; then
         ((positions++))
     fi
 }
@@ -128,10 +141,9 @@ while [ $done = "false" ]; do
 done
 mapfile -t route < <(printf "%s\n" "${route[@]}" | sort -u)
 
-
-print_map
-
+# For each location reset the map and add an obstacle at the location. Then check for a loop
 for location in "${route[@]}"; do
+    if [ "$location" = "$start_i","$start_j" ]; then continue; fi
     done=false
     guard_i=$start_i
     guard_j=$start_j
@@ -141,8 +153,6 @@ for location in "${route[@]}"; do
     map["$location"]="#"
     check_loop
     map["$location"]="."
-    break
 done
 
 echo $positions
-# echo "${route[@]}"
