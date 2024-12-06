@@ -11,5 +11,6 @@ Working on [Advent of Code 2024](https://adventofcode.com/2024/)!
 |  03 | Mull It Over       | [**A**](03/day3.sh)   | [**B**](03/day3.sh)  | ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
 |  04 | Ceres Search       | [**A**](04/day4.sh)   |                      | ![](https://img.shields.io/badge/stars%20⭐-1-yellow) |
 |  05 | Print Queue        | [**A**](05/day5.sh)   |                      | ![](https://img.shields.io/badge/stars%20⭐-1-yellow) |
+|  06 | Guard Gallivant    | [**A**](06/day6.sh)   |                      | ![](https://img.shields.io/badge/stars%20⭐-1-yellow) |
 
 *Badges from: https://github.com/J0B10/aoc-badges-action*
