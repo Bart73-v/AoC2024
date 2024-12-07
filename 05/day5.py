@@ -38,11 +38,3 @@ for update in updates:
     # sum+=value
 
 print(sum)
-
-
-# sort pages
-while not is_ordered(pages):
-  for i in range(len(pages)):
-    for j in range(i+1, len(pages)):
-      if update[j] in rules[i]:
-        update[j], update[i] = update[i], update[j]
