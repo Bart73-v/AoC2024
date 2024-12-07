@@ -1,7 +1,7 @@
 import sys
-from secrets import randbelow
 
 rules = {} # A|B -> rules[A]=[B] -> B is a successor of A
+pre_rules = {} # A|B -> rules[B]=[A] -> A is a predecessor of B
 updates = []
 
 with open(sys.argv[1], "r") as file:
@@ -10,31 +10,63 @@ with open(sys.argv[1], "r") as file:
             x, y = map(int, line.split('|'))
             if x not in rules:
                 rules[x]=[]
+            if y not in pre_rules:
+                pre_rules[y]=[]
             rules[x].append(y)
+            pre_rules[y].append(x)
         elif line.strip():
             updates.append([int(i) for i in line.split(',')])
 
 def valid(update):
-    # return true & value of middle element if valid, otherwise false & position of wrongly placed page
     for id, page in enumerate(reversed(update)):
         if page in rules:
             for other_page in update[:(len(update)-id)]:
                 if other_page in rules[page]:
-                    return False, (len(update)-id-1)
-    return True, (update[len(update)//2])
+                    return False
+    return True
 
 sum = 0
 
+def create_valid_update(elem, new_update, update, predecessors):
+    update_copy=update.copy()
+    update_copy.remove(elem)
+    new_update_copy=new_update.copy()
+    new_update_copy.append(elem)
+    predecessors_copy=predecessors.copy()
+
+    predecessors = []
+    if not update_copy:
+        #print("Found valid: " + str(new_update_copy) + " : " + str(new_update_copy[len(new_update_copy)//2]))
+        return new_update_copy[len(new_update_copy)//2]
+    elif elem in pre_rules:
+        predecessors = list(set(update_copy) & set(pre_rules[elem]))
+        if not predecessors:
+            return 0
+    #print("Elem: " + str(elem) + " Predecessors: " + str(predecessors))
+        
+    result = 0
+    for predecessor in predecessors:
+        result = max(result, create_valid_update(predecessor, new_update_copy, update_copy, predecessors_copy))
+    return result
+
+# print(rules)
+# print(pre_rules)
+# print(updates)
+
+
 for update in updates:
-    result, value = valid(update)
-    if result:
+    if valid(update):
         continue
-    # while not result:
-    #     for i in range(value, len(update)):
-    #         for j in range(i+1, len(update)):
-    #             if update[i] in rules[update[j]]:
-    #                 update[j], update[i] = update[i], update[j]
-    #     result, value = valid(update)
-    # sum+=value
+    # print("Update: " + str(update))
+    result = 0
+    for page in update:
+        if page not in pre_rules:
+            predecessors = update.copy()
+            predecessors.remove(page)
+        else:
+            predecessors = pre_rules[page]
+        result = max(result, create_valid_update(page, [], update, predecessors))
+    sum += result
+    # print("Sum: " + str(sum))
 
 print(sum)
