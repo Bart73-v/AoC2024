@@ -2,8 +2,8 @@
 
 Working on [Advent of Code 2024](https://adventofcode.com/2024/)!
 
-![](https://img.shields.io/badge/days%20completed-8-red)  
-![](https://img.shields.io/badge/stars%20⭐-16-yellow)
+![](https://img.shields.io/badge/days%20completed-9-red)  
+![](https://img.shields.io/badge/stars%20⭐-17-yellow)
 
 | Day | Problem               | Part One              | Part Two             | Stars won                                            |
 |----:|:----------------------|:----------------------|:---------------------|:------------------------------------------------------|
@@ -15,5 +15,6 @@ Working on [Advent of Code 2024](https://adventofcode.com/2024/)!
 |  06 | Guard Gallivant       | [**A**](06/day6.sh)   | [**B**](06/day6b.sh) | ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
 |  07 | Bridge Repair         | [**A**](07/day7.sh)   | [**B**](07/day7b.py) | ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
 |  08 | Resonant Collinearity | [**A**](08/day8.sh)   | [**B**](08/day8b.sh) | ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
+|  09 | Disk Fragmenter       | [**A**](09/day9.py)   |                      | ![](https://img.shields.io/badge/stars%20⭐-1-yellow) |
 
 *Badges from: https://github.com/J0B10/aoc-badges-action*
