@@ -3,7 +3,7 @@
 Working on [Advent of Code 2024](https://adventofcode.com/2024/)!
 
 ![](https://img.shields.io/badge/days%20completed-11-red)  
-![](https://img.shields.io/badge/stars%20⭐-21-yellow)
+![](https://img.shields.io/badge/stars%20⭐-22-yellow)
 
 | Day | Problem               | Part One              | Part Two             | Stars won                                            |
 |----:|:----------------------|:----------------------|:---------------------|:------------------------------------------------------|
@@ -17,6 +17,6 @@ Working on [Advent of Code 2024](https://adventofcode.com/2024/)!
 |  08 | Resonant Collinearity | [**A**](08/day8.sh)   | [**B**](08/day8b.sh) | ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
 |  09 | Disk Fragmenter       | [**A**](09/day9.py)   | [**B**](09/day9b.py) | ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
 |  10 | Hoof It               | [**A**](10/day10.py)  | [**B**](10/day10b.py)| ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
-|  11 | Plutonian Pebbles     | [**A**](11/day11.py)  |                      | ![](https://img.shields.io/badge/stars%20⭐-1-yellow) |
+|  11 | Plutonian Pebbles     | [**A**](11/day11.py)  | [**A**](11/day11b.py)| ![](https://img.shields.io/badge/stars%20⭐-2-yellow) |
 
 *Badges from: https://github.com/J0B10/aoc-badges-action*
